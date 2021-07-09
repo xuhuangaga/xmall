@@ -20,16 +20,16 @@
         </div>
         <div class="hot_btn f-size12 flex-j-center a-center m-t20">
           <div size="small" class="detal c-hand">查看详情</div>
-          <div class="p-relative">
-            <div class="small_img bg-c-w flex-j-center a-center" ref="sss">
-              <img :src="item.picUrl" width="30" height="30" />
-            </div>
+          <div>
             <div
               size="small"
               type="primary"
-              class="car f-c-w c-hand m-l10"
-              @click.stop="addCar(item.productId)"
+              class="car f-c-w c-hand m-l10 p-relative"
+              @click.stop="addCar(item.productId,index,$event)"
             >
+              <div class="small_img bg-c-w flex-j-center a-center" ref="hot">
+                <img :src="item.picUrl" width="30" height="30" />
+              </div>
               加入购物车
             </div>
           </div>
@@ -70,9 +70,12 @@ export default {
       window.open(routeUrl.href, "_blank");
     },
     //加入购物车
-    addCar(id) {
-      this.$emit("addCar", id);
-      this.$refs.sss[0].classList.add("small_img_ani");
+    addCar(id,index,event) {
+      let sm_imgX=event.offsetX
+      let sm_imgY=event.offsetY
+      let topCartDv=this.$refs.topCart
+      // console.log(topCartDv);
+      // this.$refs.hot[index].classList.add("small_img_ani");
     }
   },
   mounted() {
@@ -95,7 +98,7 @@ export default {
     border: 1px solid #eee;
     position: absolute;
     top: -50px;
-    display: none;
+    display: block;
   }
   .small_img_ani {
     animation: smallImg 1s forwards;
@@ -104,10 +107,10 @@ export default {
 }
 @keyframes smallImg {
   0% {
-    transform: translate(0px, 0px);
+    transform: translate(0%, 0%);
   }
   100% {
-    transform: translate(800px, -800px);
+    transform: translate(60%, -60%);
   }
 }
 </style>

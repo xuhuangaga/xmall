@@ -33,7 +33,15 @@ const routes = [
         meta:{
           title:'全部商品'
         }
-      },
+      },,
+      {
+       path: '/demo',
+       name: 'Demo',
+       component: ()=>import('../views/demo/Demo.vue'),
+       meta:{
+         title:'测试'
+       }
+     },
     ]
   }
   ,

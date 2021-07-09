@@ -27,7 +27,7 @@ export default {
   data() {
     return {
       //所有数据
-      list: []
+      list: [],
     };
   },
   components: {
@@ -38,7 +38,7 @@ export default {
     //热卖产品
     Hot,
     //主体部分
-    Main
+    Main,
   },
   methods: {
     //获取数据

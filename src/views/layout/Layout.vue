@@ -14,19 +14,23 @@
 <script>
 import Top from "../../components/top/Top";
 import Footer from "../../components/footer/Footer";
-import Nav from '../../components/nav/Nav';
+import Nav from "../../components/nav/Nav";
 export default {
   name: "",
   props: {},
   data() {
-    return {};
+    return {
+      topCartDvX: 0,
+      topCartDvX: 0
+    };
   },
   components: {
     Top,
     Footer,
     Nav
   },
-  methods: {},
+  methods: {
+  },
   mounted() {},
   computed: {},
   watch: {}
@@ -40,15 +44,15 @@ export default {
   padding: 0px 10px;
 }
 .nav {
-  background: rgb(247,247,247);
+  background: rgb(247, 247, 247);
   padding: 40px 20px;
 }
 .main {
-  background: rgb(237,237,237);
+  background: rgb(237, 237, 237);
   padding: 0 10px 50px 10px !important;
 }
 .footer {
-  background: rgb(250,250,250);
+  background: rgb(250, 250, 250);
   height: 100% !important;
   padding: 0px 10px;
 }

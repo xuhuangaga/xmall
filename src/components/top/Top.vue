@@ -19,7 +19,7 @@
         <div class="f-c-w top_dv c-hand">捐赠</div>
         <div class="top_sh top_dv">|</div>
         <div class="top_dv c-hand"><i class="iconfont icon-yonghu"></i></div>
-        <div class="top_dv flex-j-center a-center">
+        <div class="top_dv flex-j-center a-center" ref="topCart">
           <div class=" flex-j-center a-center">
             <div class=" c-hand"><i class="iconfont icon-gouwuche"></i></div>
             <div class="car_num">0</div>
@@ -55,7 +55,8 @@ export default {
         .then(res => {
           if (res.data.code === 200) {
             this.carList = res.data.data;
-            // console.log(this.carList);
+            this.$store.commit("setCartsList", JSON.stringify(this.carList));
+            localStorage.setItem("carList", JSON.stringify(this.carList));
           }
         })
         .catch(error => {

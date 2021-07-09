@@ -4,7 +4,7 @@
       <i class="iconfont icon-jt_top"></i>
     </div>
     <div class="top_car_list_dv">
-      <div v-if="list.length === 0" style="margin-top:40%">
+      <div v-if="!list" style="margin-top:40%">
         <div class="flex-j-center a-center">
           <i class="iconfont icon-gouwuche1"></i>
         </div>
@@ -43,9 +43,9 @@
         </div>
       </div>
     </div>
-    <div class="flex-j-between a-center compute_dv" v-if="list.length > 0">
+    <div class="flex-j-between a-center compute_dv" v-if="list">
       <div>
-        <div class="f-size12">共 {{ totalCount }} 件商品</div>
+        <div class="f-size12">共 {{ list.length }} 件商品</div>
         <div class="flex a-center m-t10">
           <div>合计：</div>
           <div class="price f-size12 f-w-bold">￥</div>
@@ -68,7 +68,6 @@ export default {
   props: {},
   data() {
     return {
-      totalCount: 0,
       totalMoney: 0,
       list: []
     };
@@ -99,28 +98,20 @@ export default {
           this.$message.error(`请求失败.${error}`);
         });
     },
-    //获取购物车数据
-    getCarData() {
-      axios
-        .get("/api/goods/getCart")
-        .then(res => {
-          if (res.data.code === 200) {
-            this.list = res.data.data;
-            this.list.map(item => {
-              this.totalCount += item.count;
-              this.totalMoney += item.salePrice;
-            });
-            // console.log(this.carList);
-          }
-        })
-        .catch(error => {
-          this.$message.error(`请求失败!${error}`);
+    //获取数据
+    getData() {
+      let ls_carList = localStorage.getItem("carList");
+      this.list = ls_carList ? JSON.parse(ls_carList) : null;
+      if (this.list) {
+        this.list.map(item => {
+          this.totalMoney += item.salePrice * item.count;
         });
+      }
     }
   },
   mounted() {
     // console.log(this.list);
-    this.getCarData();
+    this.getData();
   },
   computed: {},
   watch: {}
